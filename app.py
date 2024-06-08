@@ -26,6 +26,7 @@ import streamlit as st
 import pandas as pd
 from os import listdir
 from os.path import join, dirname
+from math import ceil
 
 # Define the directory
 directory = join(dirname(__file__), 'images', 'bike')
