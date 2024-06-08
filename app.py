@@ -3,7 +3,7 @@ from os import listdir
 from math import ceil
 import pandas as pd
 
-directory = r'images\bike'
+directory = 'images/bike'  # Ensure this is the correct relative path
 files = listdir(directory)
 
 def initialize():    
