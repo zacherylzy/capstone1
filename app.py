@@ -1,3 +1,4 @@
+"""
 import streamlit as st
 from os import listdir
 from math import ceil
@@ -19,6 +20,29 @@ if 'df' not in st.session_state:
 else:
     df = st.session_state.df 
 
+"""
+
+import streamlit as st
+import pandas as pd
+from os import listdir
+from os.path import join, dirname
+
+# Define the directory
+directory = join(dirname(__file__), 'images', 'bike')
+files = listdir(directory)
+
+def initialize():
+    df = pd.DataFrame({'file': files})
+    return df
+
+df = initialize()
+
+for file in df['file']:
+    img_path = join(directory, file)
+    try:
+        st.image(img_path, caption=file)
+    except Exception as e:
+        st.error(f"Error opening {img_path}: {e}")
 
 controls = st.columns(3)
 with controls[0]:
