@@ -40,6 +40,7 @@ with st.sidebar:
 if open_modal:
     data_protection_modal.open()
 
+
 if data_protection_modal.is_open():
     with data_protection_modal.container():
         if region == "Singapore":
@@ -54,8 +55,14 @@ if data_protection_modal.is_open():
               <p>Do you consent to the collection, use, and disclosure of your personal data for these purposes?</p>
               <p>We are Zachery's Bicycle Company Pte Ltd, and our contact information is 11 Woodlands Close #05-31 Singapore 737853.</p>
               <p>Specify Data Retention Duration:</p>
-              <div id="retention-slider-value"></div>
-              <input type="range" min="0" max="10" value="5" class="slider" id="retention-slider" oninput="updateRetentionSliderValue(this.value)">
+            </div>
+            """, unsafe_allow_html=True)
+
+            retention_duration_sg = st.slider("Data Retention Duration (Years)", min_value=0, max_value=10, value=5, step=1)
+            st.write(f"Selected Data Retention Duration: {retention_duration_sg} years")
+
+            st.markdown("""
+            <div id="consent-popup">
               <p>Security Measures:</p>
               <ul>
                 <li><input type="checkbox" id="encryption"> Data Encryption</li>
@@ -66,11 +73,6 @@ if data_protection_modal.is_open():
               <button id="decline">No, I Do Not Consent</button>
               <p><a href="/privacy-policy">Learn more about our data practices</a></p>
             </div>
-            <script>
-            function updateRetentionSliderValue(value) {
-                document.getElementById("retention-slider-value").innerHTML = value + " years";
-            }
-            </script>
             """, unsafe_allow_html=True)
 
         elif region == "European Union":
@@ -87,20 +89,23 @@ if data_protection_modal.is_open():
                 <li><input type="checkbox" id="marketing"> Marketing Cookies</li>
               </ul>
               <p>Specify Data Retention Duration:</p>
-              <div id="retention-slider-value"></div>
-              <input type="range" min="0" max="10" value="5" class="slider" id="retention-slider" oninput="updateRetentionSliderValue(this.value)">
+            </div>
+            """, unsafe_allow_html=True)
+
+            retention_duration_eu = st.slider("Data Retention Duration (Years)", min_value=0, max_value=10, value=5, step=1)
+            st.write(f"Selected Data Retention Duration: {retention_duration_eu} years")
+
+            st.markdown("""
+            <div id="consent-popup">
               <p>You have the right to access, rectify, or erase your data under the GDPR. You can also withdraw your consent at any time.</p>
               <p>Data Access: <button id="request-access">Request Data Access</button></p>
               <button id="accept">Accept All</button>
               <button id="customize">Customize</button>
               <button id="decline">Decline</button>
             </div>
-            <script>
-            function updateRetentionSliderValue(value) {
-                document.getElementById("retention-slider-value").innerHTML = value + " years";
-            }
-            </script>
             """, unsafe_allow_html=True)
+
+        # Rest of the code remains the same
 
         elif region == "United States (California)":
             st.markdown("""
