@@ -25,6 +25,10 @@ def update(image):
     df.at[image, 'in_cart'] = not df.at[image, 'in_cart']
     st.session_state.cart_items = df[df['in_cart'] == True].shape[0]
 
+def clear_cart():
+    df['in_cart'] = False
+    st.session_state.cart_items = 0
+
 # Create a modal dialog for data protection
 data_protection_modal = Modal("Data Protection", key="data_protection_modal")
 
@@ -160,7 +164,7 @@ st.subheader("List of Bikes for Sale")
 if 'cart_items' not in st.session_state:
     st.session_state.cart_items = 0
 
-col1, col2 = st.columns([4, 1])
+col1, col2, col3 = st.columns([4, 1, 1])
 
 with col1:
     grid = st.columns(5)
@@ -181,9 +185,10 @@ with col1:
                           help="This item is already in your cart.")
         col = (col + 1) % 5
 
-with col2:
+with col3:
     st.write("")  # Add some space between the bike images and the shopping cart
     CART_LOGO = "images/cart_logo.jpg"  # Replace with the path to your cart logo image
     st.image(CART_LOGO, width=50)
     st.write(f"Items: {st.session_state.cart_items}")
-    st.button("View Cart")
+    st.button("View Shopping Cart")
+    st.button("Clear Cart", on_click=clear_cart)
