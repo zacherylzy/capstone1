@@ -51,7 +51,14 @@ if data_protection_modal.is_open():
                 <li>To send you marketing communications</li>
               </ul>
               <p>Do you consent to the collection, use, and disclosure of your personal data for these purposes?</p>
-              <p>We are Zachery’s Bicycle Company Pte Ltd, and our contact information is 11 Woodlands Close #05-31 Singapore 737853</p>
+              <p>We are Zachery's Bicycle Company Pte Ltd, and our contact information is 11 Woodlands Close #05-31 Singapore 737853.</p>
+              <p>Data Retention: <input type="range" min="1" max="10" value="5" class="slider" id="retention-slider"></p>
+              <p>Security Measures:</p>
+              <ul>
+                <li><input type="checkbox" id="encryption"> Data Encryption</li>
+                <li><input type="checkbox" id="pseudonymization"> Data Pseudonymization</li>
+              </ul>
+              <p>Data Access: <button id="request-access">Request Data Access</button></p>
               <button id="accept">Yes, I Consent</button>
               <button id="decline">No, I Do Not Consent</button>
               <p><a href="/privacy-policy">Learn more about our data practices</a></p>
@@ -71,7 +78,9 @@ if data_protection_modal.is_open():
                 <li><input type="checkbox" id="analytics"> Analytics Cookies</li>
                 <li><input type="checkbox" id="marketing"> Marketing Cookies</li>
               </ul>
+              <p>Data Retention: <input type="range" min="1" max="10" value="5" class="slider" id="retention-slider"></p>
               <p>You have the right to access, rectify, or erase your data under the GDPR. You can also withdraw your consent at any time.</p>
+              <p>Data Access: <button id="request-access">Request Data Access</button></p>
               <button id="accept">Accept All</button>
               <button id="customize">Customize</button>
               <button id="decline">Decline</button>
@@ -89,6 +98,9 @@ if data_protection_modal.is_open():
                 <li>Request deletion of your data</li>
                 <li>Opt-out of the sale of your personal data</li>
               </ul>
+              <p>Data Retention: Our data retention policies are disclosed in our <a href="/privacy-policy">Privacy Policy</a>.</p>
+              <p>Security Measures: We maintain reasonable security procedures and practices appropriate to the nature of the personal information we collect.</p>
+              <p>Data Access: <button id="request-access">Request Data Access</button></p>
               <p>Do you consent to the collection and use of your personal information?</p>
               <button id="accept">I Consent</button>
               <button id="opt-out">Do Not Sell My Personal Information</button>
