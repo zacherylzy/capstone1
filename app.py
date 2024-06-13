@@ -44,14 +44,14 @@ if data_protection_modal.is_open():
         if region == "Singapore":
             st.markdown("""
             <div id="consent-popup">
-              <h2>Data Protection in accordance with Singapore PDPA</h2>
+              <h2>In accordance with Singapore PDPA</h2>
               <p>We need your consent to collect and use your personal data for the following purposes:</p>
               <ul>
                 <li>To provide you with our services</li>
                 <li>To send you marketing communications</li>
               </ul>
               <p>Do you consent to the collection, use, and disclosure of your personal data for these purposes?</p>
-              <p>We are [Organization Name], and our contact information is [Contact Information].</p>
+              <p>We are Zachery’s Bicycle Company Pte Ltd, and our contact information is 11 Woodlands Close #05-31 Singapore 737853</p>
               <button id="accept">Yes, I Consent</button>
               <button id="decline">No, I Do Not Consent</button>
               <p><a href="/privacy-policy">Learn more about our data practices</a></p>
@@ -61,7 +61,7 @@ if data_protection_modal.is_open():
         elif region == "European Union":
             st.markdown("""
             <div id="consent-popup">
-              <h2>Data Protection in accordance with EU GDPR</h2>
+              <h2>In accordance with EU GDPR</h2>
               <p>We use cookies and other tracking technologies to improve your browsing experience on our website, to show you personalized content, and to analyze our website traffic.</p>
               <p>Please read our <a href="/privacy-policy">Privacy Policy</a> for more information.</p>
               <p>Select your preferences:</p>
@@ -81,7 +81,7 @@ if data_protection_modal.is_open():
         elif region == "United States (California)":
             st.markdown("""
             <div id="consent-popup">
-              <h2>Data Protection in accordance with United States (California) CCPA</h2>
+              <h2>In accordance with United States (California) CCPA</h2>
               <p>We collect personal information, including [categories of personal information], to provide and improve our services. Please review our <a href="/privacy-policy">Privacy Policy</a> for more information.</p>
               <p>You have the right to:</p>
               <ul>
