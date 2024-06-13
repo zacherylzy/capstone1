@@ -142,6 +142,7 @@ st.write(df[df['incorrect'] == True])
 
 
 import streamlit as st
+from streamlit_modal import Modal
 from os import listdir
 from math import ceil
 import pandas as pd
@@ -171,7 +172,10 @@ def update(image, col):
         df.at[image, 'label'] = ''
 
 # Create a modal dialog for setting data retention period
-data_retention_modal = st.modal("Set Data Retention Period", key="data_retention_modal")
+data_retention_modal = Modal("Set Data Retention Period", key="data_retention_modal")
+open_modal = st.button("Set Data Retention Period")
+if open_modal:
+    data_retention_modal.open()
 
 if data_retention_modal.is_open():
     with data_retention_modal.container():
@@ -182,9 +186,6 @@ if data_retention_modal.is_open():
             # Handle data retention period
             st.write(f"Data will be kept for {data_retention_years} years.")
             data_retention_modal.close()
-
-# Open the data retention modal when the app launches
-data_retention_modal.open()
 
 batch_size = st.select_slider("Batch size:", range(10, 110, 10))
 row_size = st.select_slider("Row size:", range(1, 6), value=5)
