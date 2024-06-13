@@ -179,10 +179,10 @@ with col1:
             except Exception as e:
                 st.error(f"Error opening {file_path}: {e}")
             if not df.at[image, 'in_cart']:
-                st.button("Add to Cart", key=f'cart_{image}', on_click=update, args=(image,), use_container_width=True, help=None)
+                st.button("Add to Cart", key=f'cart_{image}', on_click=update, args=(image,))
             else:
                 st.button("Added to Cart", key=f'cart_{image}', on_click=update, args=(image,), disabled=True,
-                          help="This item is already in your cart.", use_container_width=True)
+                          help="This item is already in your cart.")
         col = (col + 1) % 5
 
 with col3:
@@ -190,5 +190,5 @@ with col3:
     CART_LOGO = "images/cart_logo.jpg"  # Replace with the path to your cart logo image
     st.image(CART_LOGO, width=50)
     st.write(f"Items: {st.session_state.cart_items}")
-    st.button("View Shopping Cart", use_container_width=True, help=None)
-    st.button("Clear Cart", on_click=clear_cart, use_container_width=True, help=None)
+    st.button("View Shopping Cart")
+    st.button("Clear Cart", on_click=clear_cart)
