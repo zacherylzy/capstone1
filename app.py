@@ -1,7 +1,6 @@
 import streamlit as st
 from streamlit_modal import Modal
 from os import listdir
-from math import ceil
 import pandas as pd
 import os
 
@@ -11,7 +10,7 @@ files = listdir(directory)
 
 def initialize():
     df = pd.DataFrame({'file': files,
-                       'incorrect': [False] * len(files),
+                       'in_cart': [False] * len(files),
                        'label': [''] * len(files)})
     df.set_index('file', inplace=True)
     return df
@@ -22,11 +21,9 @@ if 'df' not in st.session_state:
 else:
     df = st.session_state.df
 
-def update(image, col):
-    df.at[image, col] = st.session_state[f'{col}_{image}']
-    if st.session_state[f'incorrect_{image}'] == False:
-        st.session_state[f'label_{image}'] = ''
-        df.at[image, 'label'] = ''
+def update(image):
+    df.at[image, 'in_cart'] = not df.at[image, 'in_cart']
+    st.session_state.cart_items = df[df['in_cart'] == True].shape[0]
 
 # Create a modal dialog for data protection
 data_protection_modal = Modal("Data Protection", key="data_protection_modal")
@@ -107,34 +104,31 @@ if data_protection_modal.is_open():
             </div>
             """, unsafe_allow_html=True)
 
-batch_size = st.select_slider("Batch size:", range(10, 110, 10))
-row_size = st.select_slider("Row size:", range(1, 6), value=5)
-num_batches = ceil(len(files) / batch_size)
-page = st.selectbox("Page", range(1, num_batches + 1))
-batch = files[(page - 1) * batch_size: page * batch_size]
-grid = st.columns(row_size)
-col = 0
+st.title("Zachery's Bicycle Company Pte Ltd")
 
-for image in batch:
-    with grid[col]:
-        # Construct the file path using os.path.join()
-        file_path = os.path.join(directory, image)
-        try:
-            st.image(file_path, caption='bike')
-        except Exception as e:
-            st.error(f"Error opening {file_path}: {e}")
-        st.checkbox("Incorrect", key=f'incorrect_{image}',
-                    value=df.at[image, 'incorrect'],
-                    on_change=update, args=(image, 'incorrect'))
-        if df.at[image, 'incorrect']:
-            st.text_input('New label:', key=f'label_{image}',
-                          value=df.at[image, 'label'],
-                          on_change=update, args=(image, 'label'))
-        else:
-            st.write('##')
-            st.write('##')
-            st.write('###')
-    col = (col + 1) % row_size
+if 'cart_items' not in st.session_state:
+    st.session_state.cart_items = 0
 
-st.write('## Corrections')
-st.write(df[df['incorrect'] == True])
+col1, col2 = st.columns([4, 1])
+
+with col1:
+    grid = st.columns(5)
+    col = 0
+
+    for image in files:
+        with grid[col]:
+            # Construct the file path using os.path.join()
+            file_path = os.path.join(directory, image)
+            try:
+                st.image(file_path, caption='bike')
+            except Exception as e:
+                st.error(f"Error opening {file_path}: {e}")
+            st.button("Add to Cart", key=f'cart_{image}',
+                      on_click=update, args=(image,))
+            st.write(df.at[image, 'label'])
+        col = (col + 1) % 5
+
+with col2:
+    st.write("Shopping Cart")
+    st.write(f"Items: {st.session_state.cart_items}")
+    st.button("View Cart")
