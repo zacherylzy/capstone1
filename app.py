@@ -130,7 +130,7 @@ with col1:
 
 with col2:
     st.write("")  # Add some space between the bike images and the shopping cart
-    CART_LOGO = "images/cart_logo.png"  # Replace with the path to your cart logo image
+    CART_LOGO = "images/cart_logo.jpg"  # Replace with the path to your cart logo image
     st.image(CART_LOGO, width=50)
     st.write(f"Items: {st.session_state.cart_items}")
     st.button("View Cart")
