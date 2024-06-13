@@ -11,7 +11,7 @@ files = listdir(directory)
 def initialize():
     df = pd.DataFrame({'file': files,
                        'in_cart': [False] * len(files),
-                       'label': [''] * len(files)})
+                       'label': [f"Bicycle {chr(65 + i // 5)}{i % 5 + 1}" for i in range(len(files))]})
     df.set_index('file', inplace=True)
     return df
 
@@ -31,7 +31,7 @@ data_protection_modal = Modal("Data Protection", key="data_protection_modal")
 # Sidebar for setting data protection
 with st.sidebar:
     open_modal = st.button("Set Data Protection")
-    region = st.radio("Select Region", ["Singapore", "European Union", "United States (California)", "India", "China", "Russia", "Brazil"])
+    region = st.radio("Region/Jurisdiction", ["Singapore", "European Union", "United States (California)", "India", "China", "Russia", "Brazil"])
 
 if open_modal:
     data_protection_modal.open()
@@ -171,11 +171,14 @@ with col1:
             # Construct the file path using os.path.join()
             file_path = os.path.join(directory, image)
             try:
-                st.image(file_path, caption='bike', use_column_width=True)
+                st.image(file_path, caption=df.at[image, 'label'], use_column_width=True)
             except Exception as e:
                 st.error(f"Error opening {file_path}: {e}")
-            st.button("Add to Cart", key=f'cart_{image}', on_click=update, args=(image,))
-            st.write(df.at[image, 'label'])
+            if not df.at[image, 'in_cart']:
+                st.button("Add to Cart", key=f'cart_{image}', on_click=update, args=(image,))
+            else:
+                st.button("Added to Cart", key=f'cart_{image}', on_click=update, args=(image,), disabled=True,
+                          help="This item is already in your cart.")
         col = (col + 1) % 5
 
 with col2:
