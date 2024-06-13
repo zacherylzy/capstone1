@@ -31,7 +31,7 @@ data_protection_modal = Modal("Data Protection", key="data_protection_modal")
 # Sidebar for setting data protection
 with st.sidebar:
     open_modal = st.button("Set Data Protection")
-    region = st.radio("Select Region", ["Singapore", "European Union", "United States (California)"])
+    region = st.radio("Select Region", ["Singapore", "European Union", "United States (California)", "India", "China", "Russia", "Brazil"])
 
 if open_modal:
     data_protection_modal.open()
@@ -104,6 +104,56 @@ if data_protection_modal.is_open():
             </div>
             """, unsafe_allow_html=True)
 
+        elif region == "India":
+            st.markdown("""
+            <div id="consent-popup">
+              <h2>In accordance with India's Data Protection Regulations</h2>
+              <p>Please note that the Personal Data Protection Bill (PDPB) 2019 is still a bill and not yet an act. The bill is under review and subject to changes.</p>
+              <p>We comply with the Information Technology Act, 2000 and the Information Technology (Reasonable Security Practices and Procedures and Sensitive Personal Data or Information) Rules, 2011.</p>
+              <p>For more information, please visit:</p>
+              <ul>
+                <li><a href="https://www.meity.gov.in/content/data-protection-frameworkand">Data Protection Framework</a></li>
+                <li><a href="http://meity.gov.in/writereaddata/files/Rulesforsecureit.pdf">Rules for Secure IT</a></li>
+              </ul>
+            </div>
+            """, unsafe_allow_html=True)
+
+        elif region == "China":
+            st.markdown("""
+            <div id="consent-popup">
+              <h2>In accordance with China's Personal Information Protection Law (PIPL)</h2>
+              <p>The Personal Information Protection Law (PIPL) came into effect on November 1, 2021.</p>
+              <p>For more information, please visit:</p>
+              <ul>
+                <li><a href="https://digichina.stanford.edu/work/translation-personal-information-protection-law-of-the-peoples-republic-of-china-effective-nov-1-2021/">Personal Information Protection Law (English Translation)</a></li>
+              </ul>
+            </div>
+            """, unsafe_allow_html=True)
+
+        elif region == "Russia":
+            st.markdown("""
+            <div id="consent-popup">
+              <h2>In accordance with Russia's Federal Law on Personal Data (No. 152-FZ)</h2>
+              <p>The Federal Law on Personal Data (No. 152-FZ) came into effect in 2006.</p>
+              <p>For more information, please visit:</p>
+              <ul>
+                <li><a href="https://pd.rkn.gov.ru/docs/Federal_Law_On_personal_data.doc">Federal Law on Personal Data (English Translation)</a></li>
+              </ul>
+            </div>
+            """, unsafe_allow_html=True)
+
+        elif region == "Brazil":
+            st.markdown("""
+            <div id="consent-popup">
+              <h2>In accordance with Brazil's General Data Protection Law (LGPD)</h2>
+              <p>The General Data Protection Law (LGPD) regulates the processing of personal data in Brazil.</p>
+              <p>For more information, please visit:</p>
+              <ul>
+                <li><a href="https://iapp.org/resources/article/brazilian-data-protection-law-lgpd-english-translation/">General Data Protection Law (English Translation)</a></li>
+              </ul>
+            </div>
+            """, unsafe_allow_html=True)
+
 st.title("Zachery's Bicycle Company Pte Ltd")
 st.subheader("List of Bikes for Sale")
 
@@ -124,7 +174,7 @@ with col1:
                 st.image(file_path, caption='bike', use_column_width=True)
             except Exception as e:
                 st.error(f"Error opening {file_path}: {e}")
-            st.button("Add to Cart", key=f'cart_{image}', on_click=update, args=(image,), size="small")
+            st.button("Add to Cart", key=f'cart_{image}', on_click=update, args=(image,))
             st.write(df.at[image, 'label'])
         col = (col + 1) % 5
 
