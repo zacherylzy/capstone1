@@ -34,7 +34,7 @@ data_protection_modal = Modal("Data Protection", key="data_protection_modal")
 
 # Sidebar for setting data protection
 with st.sidebar:
-    open_modal = st.button("Set Data Protection")
+    open_modal = st.button("Configure Data Protection Settings")
     region = st.radio("Region/Jurisdiction", ["Singapore", "European Union", "United States (California)", "India", "China", "Russia", "Brazil"])
 
 if open_modal:
