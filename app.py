@@ -105,6 +105,7 @@ if data_protection_modal.is_open():
             """, unsafe_allow_html=True)
 
 st.title("Zachery's Bicycle Company Pte Ltd")
+st.subheader("List of Bikes for Sale")
 
 if 'cart_items' not in st.session_state:
     st.session_state.cart_items = 0
@@ -120,15 +121,16 @@ with col1:
             # Construct the file path using os.path.join()
             file_path = os.path.join(directory, image)
             try:
-                st.image(file_path, caption='bike')
+                st.image(file_path, caption='bike', use_column_width=True)
             except Exception as e:
                 st.error(f"Error opening {file_path}: {e}")
-            st.button("Add to Cart", key=f'cart_{image}',
-                      on_click=update, args=(image,))
+            st.button("Add to Cart", key=f'cart_{image}', on_click=update, args=(image,), size="small")
             st.write(df.at[image, 'label'])
         col = (col + 1) % 5
 
 with col2:
-    st.write("Shopping Cart")
+    st.write("")  # Add some space between the bike images and the shopping cart
+    CART_LOGO = "images/cart_logo.png"  # Replace with the path to your cart logo image
+    st.image(CART_LOGO, width=50)
     st.write(f"Items: {st.session_state.cart_items}")
     st.button("View Cart")
