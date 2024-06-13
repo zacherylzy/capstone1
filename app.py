@@ -53,7 +53,9 @@ if data_protection_modal.is_open():
               </ul>
               <p>Do you consent to the collection, use, and disclosure of your personal data for these purposes?</p>
               <p>We are Zachery's Bicycle Company Pte Ltd, and our contact information is 11 Woodlands Close #05-31 Singapore 737853.</p>
-              <p>Specify Data Retention Duration: <input type="range" min="1" max="10" value="5" class="slider" id="retention-slider"></p>
+              <p>Specify Data Retention Duration:</p>
+              <div id="retention-slider-value"></div>
+              <input type="range" min="0" max="10" value="5" class="slider" id="retention-slider" oninput="updateRetentionSliderValue(this.value)">
               <p>Security Measures:</p>
               <ul>
                 <li><input type="checkbox" id="encryption"> Data Encryption</li>
@@ -64,6 +66,11 @@ if data_protection_modal.is_open():
               <button id="decline">No, I Do Not Consent</button>
               <p><a href="/privacy-policy">Learn more about our data practices</a></p>
             </div>
+            <script>
+            function updateRetentionSliderValue(value) {
+                document.getElementById("retention-slider-value").innerHTML = value + " years";
+            }
+            </script>
             """, unsafe_allow_html=True)
 
         elif region == "European Union":
@@ -79,13 +86,20 @@ if data_protection_modal.is_open():
                 <li><input type="checkbox" id="analytics"> Analytics Cookies</li>
                 <li><input type="checkbox" id="marketing"> Marketing Cookies</li>
               </ul>
-              <p>Specify Data Retention Duration: <input type="range" min="1" max="10" value="5" class="slider" id="retention-slider"></p>
+              <p>Specify Data Retention Duration:</p>
+              <div id="retention-slider-value"></div>
+              <input type="range" min="0" max="10" value="5" class="slider" id="retention-slider" oninput="updateRetentionSliderValue(this.value)">
               <p>You have the right to access, rectify, or erase your data under the GDPR. You can also withdraw your consent at any time.</p>
               <p>Data Access: <button id="request-access">Request Data Access</button></p>
               <button id="accept">Accept All</button>
               <button id="customize">Customize</button>
               <button id="decline">Decline</button>
             </div>
+            <script>
+            function updateRetentionSliderValue(value) {
+                document.getElementById("retention-slider-value").innerHTML = value + " years";
+            }
+            </script>
             """, unsafe_allow_html=True)
 
         elif region == "United States (California)":
