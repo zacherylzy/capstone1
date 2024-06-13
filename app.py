@@ -52,7 +52,7 @@ if data_protection_modal.is_open():
               </ul>
               <p>Do you consent to the collection, use, and disclosure of your personal data for these purposes?</p>
               <p>We are Zachery's Bicycle Company Pte Ltd, and our contact information is 11 Woodlands Close #05-31 Singapore 737853.</p>
-              <p>Data Retention: <input type="range" min="1" max="10" value="5" class="slider" id="retention-slider"></p>
+              <p>Specify Data Retention Duration: <input type="range" min="1" max="10" value="5" class="slider" id="retention-slider"></p>
               <p>Security Measures:</p>
               <ul>
                 <li><input type="checkbox" id="encryption"> Data Encryption</li>
@@ -78,7 +78,7 @@ if data_protection_modal.is_open():
                 <li><input type="checkbox" id="analytics"> Analytics Cookies</li>
                 <li><input type="checkbox" id="marketing"> Marketing Cookies</li>
               </ul>
-              <p>Data Retention: <input type="range" min="1" max="10" value="5" class="slider" id="retention-slider"></p>
+              <p>Specify Data Retention Duration: <input type="range" min="1" max="10" value="5" class="slider" id="retention-slider"></p>
               <p>You have the right to access, rectify, or erase your data under the GDPR. You can also withdraw your consent at any time.</p>
               <p>Data Access: <button id="request-access">Request Data Access</button></p>
               <button id="accept">Accept All</button>
